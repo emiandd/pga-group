@@ -16,7 +16,8 @@
 	</header>
 	<main class="d-flex justify-content-around" style="min-height: 38rem;">
 		<div class="pt-5">
-			<table class="table table-hover table-dark">
+			<% if(data.length > 0) { %>
+				<table class="table table-hover table-dark">
 				<thead>
 					<tr>
 						<th>Nombre</th>
@@ -48,6 +49,13 @@
 					<% } %>
 				</tbody>
 			</table>
+
+			<% } else { %>
+ 
+ 				<p>No se han agregado clientes</p>
+
+			<% } %> 
+			
 		</div>
 		<div class="bg-light p-4 mt-5 rounded-3 shadow"  style="height: 32rem;">
 			<form action="/clients" method="post" class="p-3">
