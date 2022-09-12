@@ -1,4 +1,5 @@
 const express = require('express');
+const methodOverride = require('method-override')
 const path = require('path');
 const morgan = require('morgan');
 const PORT = process.env.PORT || 3001;
@@ -16,6 +17,7 @@ app.set('view engine', 'ejs');
 
 // middlewares
 app.use(morgan('dev'));
+app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 

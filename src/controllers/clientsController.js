@@ -19,7 +19,6 @@ const getAllClients = async (req, res) => {
 }
 
 const createNewClient = async (req, res) => {
-	console.log(req.body)
 	try {
 		await Client.create(req.body);
 		return res.redirect('/clients')
