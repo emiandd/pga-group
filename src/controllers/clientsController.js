@@ -52,7 +52,7 @@ const updateClient = async (req, res) => {
 
 }
 
-const deleteClient = (req, res) => {
+const deleteClient = async (req, res) => {
 
 	const { id } = req.params;
 
