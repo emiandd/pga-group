@@ -7,6 +7,8 @@ router
 	.get('/clients', clientsController.getAllClients)
 	.post('/clients', clientsMiddleware.newClient, clientsController.createNewClient)
 	.put('/clients/:id', clientsMiddleware.updateClient, clientsController.updateClient)
-	.delete('/clients/:id', clientsMiddleware.deleteClient, clientsController.deleteClient)
+	.get('/clients/:id', clientsMiddleware.deleteClient, clientsController.deleteClient)
+	.get('/client/:id', clientsController.getClientById)
+
 
 module.exports = router;

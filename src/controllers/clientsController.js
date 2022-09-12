@@ -5,8 +5,12 @@ const getAllClients = async (req, res) => {
 
 	try {
 		const allClients = await Client.findAll();
+		if(allClients){
+			return res.render('clients', {
+				data: allClients
+			})
+		};
 
-		if(allClients) return res.send(allClients);
 
 	} catch(e) {
 		console.log({error:e});
@@ -15,10 +19,10 @@ const getAllClients = async (req, res) => {
 }
 
 const createNewClient = async (req, res) => {
-	
+	console.log(req.body)
 	try {
 		await Client.create(req.body);
-		return res.status(201).send({msg: 'new client successfully created'});
+		return res.redirect('/clients')
 	} catch(e) {
 		console.log({error:e})
 	}
@@ -44,7 +48,7 @@ const updateClient = async (req, res) => {
 			{where: {id: id}}
 		)
 
-		return res.status(201).send({msg: 'client successfully updated'})
+		return res.redirect('/clients')
 
 	} catch(e) {
 		console.log({error:e});
@@ -52,7 +56,7 @@ const updateClient = async (req, res) => {
 
 }
 
-const deleteClient = (req, res) => {
+const deleteClient = async (req, res) => {
 
 	const { id } = req.params;
 
@@ -61,7 +65,26 @@ const deleteClient = (req, res) => {
 			where: { id: id }
 		})
 
-		return res.status(201).send({msg: 'client successfully deleted'})
+		return res.redirect('/clients')
+
+	} catch(e) {
+		console.log({error:e});
+	}
+
+}
+
+const getClientById = async (req, res) => {
+
+	const { id } = req.params;
+
+	try {
+		
+		const client = await Client.findByPk(id);
+		if(client){
+			return res.render('editClient', {
+				data: client
+			})
+		} 
 
 	} catch(e) {
 		console.log({error:e});
@@ -73,5 +96,6 @@ module.exports = {
 	getAllClients,
 	createNewClient,
 	updateClient,
-	deleteClient
+	deleteClient,
+	getClientById
 }
